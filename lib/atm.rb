@@ -1,5 +1,4 @@
 require 'date'
-require 'Account'
 
 class Atm
   attr_accessor :funds
