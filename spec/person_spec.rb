@@ -24,5 +24,4 @@ describe Person do
    subject.get_cash(40, account, atm, account.pin)
    expect(subject.cash).to eq 40
  end
->>>>>>> a7a465f48303941d6c446e9dff47f124024006fb
 end
