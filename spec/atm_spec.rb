@@ -1,6 +1,7 @@
 require './lib/atm.rb'
 
 describe Atm do
+
   let(:person) { double(:person) }
   let(:account) { double(:account, holder: person, pin: 1234, exp_date: '10/17', balance: 100) }
 
@@ -20,6 +21,7 @@ describe Atm do
                  amount: 5,
                  bills: 1
         }
+
       expect(subject.withdraw(5, account.pin, account.exp_date, account)).to eq output
     end
 
