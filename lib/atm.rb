@@ -23,11 +23,6 @@ class Atm
       return_error_message :non_rounded_amount
     else
       do_transaction(amount, account)
-      response = { status: true,
-                  message: :success,
-                  date: Date.today.strftime("%F"),
-                  amount: amount,
-                  bills: do_bill_count(amount) }
      end
    end
 
@@ -38,6 +33,11 @@ class Atm
  def do_transaction(amount, account)
    @funds -= amount
    account.balance -= amount
+   response = { status: true,
+               message: :success,
+               date: Date.today.strftime("%F"),
+               amount: amount,
+               bills: do_bill_count(amount) }
  end
 
 
