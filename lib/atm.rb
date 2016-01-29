@@ -1,4 +1,5 @@
 require 'date'
+require 'Account'
 
 class Atm
   attr_accessor :funds
@@ -7,7 +8,11 @@ class Atm
 
    def initialize
     @funds = 1000
+
+    #@balance = 1500
    end
+
+ACCOUNT = Account.new
 
    def withdraw(amount, pin, expiry, account)
       case
@@ -15,6 +20,7 @@ class Atm
       when !check_pin(pin, account.pin) then return_error_message(:wrong_pin)
       when check_expiry(expiry, account.exp_date) then return_error_message(:card_expired)
       when !sufficient_fund_in_atm(amount) then return_error_message (:no_sufficient_fund)
+      when !balance_in_account then return_error_message (:no_sufficient_balance)
       when amount % 5 != 0 then return_error_message (:non_rounded_amount)
 
       else
@@ -33,9 +39,16 @@ class Atm
 
  def do_transaction(amount, account)
    @funds = @funds - amount
-   account.balance = account.balance - amount
+#   account.balance = account.balance - amount
+#   binding.pry
  end
 
+ def balance_in_account (amount)
+   ACCOUNT.balance > amount 
+
+   #@balance > amount
+
+ end
 
 private
  def check_expiry(date, actual_exp_date)

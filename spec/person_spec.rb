@@ -1,23 +1,21 @@
-require './lib/atm.rb'
 require './lib/person.rb'
-require './lib/account.rb'
 
 describe Person do
- subject { Person.new('Random')}
+  subject { described_class.new('Random') }
+  let(:account) { double(:account, holder: subject, balance: 100, pin: 1234, exp_date: '10/17') }
+  let(:atm) { double(:atm) }
 
- before do
-   Account.new(holder: subject, balance: 100)
-   @atm = Atm.new
+  before do
+    subject.accounts.push account
+    allow(atm).to receive(:withdraw)
   end
 
-  it 'add money to person account ' do
-    subject.accounts[0].deposit(500)
-    #@account.deposit(500) is another way to do it
-    expect(subject.accounts[0].balance).to eq 600
+  it 'should have access to account information' do
+    expect(subject.accounts[0]).to equal account
   end
 
   it 'deduct money when atm withdraw from balance' do
-    subject.get_cash(40, subject.accounts[0], @atm, subject.accounts[0].pin)
-    expect(subject.accounts[0].balance).to eq 60
+    subject.get_cash(40, account, atm, account.pin)
+    expect(subject.cash).to eq 40
   end
 end
