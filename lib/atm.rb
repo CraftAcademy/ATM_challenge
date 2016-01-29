@@ -12,7 +12,7 @@ class Atm
     #@balance = 1500
    end
 
-ACCOUNT = Account.new
+#ACCOUNT = Account.new
 
    def withdraw(amount, pin, expiry, account)
       case
@@ -20,7 +20,7 @@ ACCOUNT = Account.new
       when !check_pin(pin, account.pin) then return_error_message(:wrong_pin)
       when check_expiry(expiry, account.exp_date) then return_error_message(:card_expired)
       when !sufficient_fund_in_atm(amount) then return_error_message (:no_sufficient_fund)
-      when !balance_in_account then return_error_message (:no_sufficient_balance)
+      when !balance_in_account(amount, account.balance) then return_error_message (:no_sufficient_balance)
       when amount % 5 != 0 then return_error_message (:non_rounded_amount)
 
       else
@@ -43,12 +43,7 @@ ACCOUNT = Account.new
 #   binding.pry
  end
 
- def balance_in_account (amount)
-   ACCOUNT.balance > amount 
 
-   #@balance > amount
-
- end
 
 private
  def check_expiry(date, actual_exp_date)
@@ -69,6 +64,10 @@ private
 
  def return_error_message(message)
    { status: false, message: message, date: Date.today.strftime("%F") }
+ end
+
+ def balance_in_account(amount, balance)
+   balance >= amount
  end
 
 end
