@@ -2,7 +2,13 @@ require './lib/person.rb'
 
 describe Person do
  subject { described_class.new('Random') }
- let(:account) { double('Account', holder: subject, balance: 100, pin: 1234, exp_date: "10/17") }
+ let(:account) do
+   double('Account',
+   holder: subject,
+   balance: 100,
+   pin: 1234, 
+   exp_date: "10/17")
+ end
  let(:atm) { double(:atm) }
 
  before do

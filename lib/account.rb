@@ -24,9 +24,7 @@ class Account
   private
 
   def set_exp_date
-    # TODO: Set the exp date 5 yrs from Date.today
     Date.today.next_year(STANDARD_VALIDITY_YRS).strftime("%m/%y")
-    #{}"10/17"
   end
 
   def generate_pin
