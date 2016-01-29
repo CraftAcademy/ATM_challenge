@@ -62,7 +62,7 @@ describe Atm do
       expect(subject.funds).to eq 995
     end
 
-    it 'does not allow for withdraw of 105$ from ATM if money not avilable in person account' do
+    it 'reject withdraw of 105$ if money not avilable in account' do
       output = { status: false,
                  message: :no_sufficient_balance,
                  date: Date.today.strftime('%F')

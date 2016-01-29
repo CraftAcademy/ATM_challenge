@@ -11,11 +11,16 @@ class Atm
 
    def withdraw(amount, pin, expiry, account)
       case
-      when negative_value?(amount) then return_error_message(:negative_amount)
-      when incorrect_pin?(pin, account.pin) then return_error_message(:wrong_pin)
-      when check_expiry(expiry, account.exp_date) then return_error_message(:card_expired)
-      when no_sufficient_fund_in_atm?(amount) then return_error_message :no_sufficient_fund
-      when adequate_balance_in_account?(amount, account.balance) then return_error_message :no_sufficient_balance
+      when negative_value?(amount) \
+        then return_error_message(:negative_amount)
+      when incorrect_pin?(pin, account.pin) \
+        then return_error_message(:wrong_pin)
+      when check_expiry(expiry, account.exp_date) \
+        then return_error_message(:card_expired)
+      when no_sufficient_fund_in_atm?(amount) \
+        then return_error_message :no_sufficient_fund
+      when adequate_balance_in_account?(amount, account.balance) \
+        then return_error_message :no_sufficient_balance
       when amount % 5 != 0 then return_error_message :non_rounded_amount
 
       else
