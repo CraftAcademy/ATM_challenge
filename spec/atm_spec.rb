@@ -67,7 +67,6 @@ describe Atm do
                  message: :no_sufficient_balance,
                  date: Date.today.strftime('%F')
         }
-        #binding.pry
       expect(subject.withdraw(105, account.pin, account.exp_date, account)).to eq output
     end
   end
