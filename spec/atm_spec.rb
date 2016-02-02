@@ -93,4 +93,18 @@ describe Atm do
       expect(subject.withdraw(30, account.pin, account.exp_date, account)).to eq output
     end
   end
+
+  context "not enough funds in account" do
+
+    before do
+      allow(account).to receive(:balance).and_return(0)
+    end
+
+    it 'rejects withdrawal' do
+      output = { status: false,
+                 message: :account_balance_too_low,
+                 date: Date.today.strftime('%F') }
+      expect(subject.withdraw(30, account.pin, account.exp_date, account)).to eq output
+    end
+  end
 end

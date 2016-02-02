@@ -1,5 +1,7 @@
 class Account
-  attr_accessor :holder, :balance, :exp_date, :pin
+  attr_accessor :holder, :balance
+  attr_reader :pin, :exp_date
+  STANDARD_VALIDITY_YRS = 5
 
   def initialize(options={})
     @holder = options[:holder]
@@ -22,8 +24,7 @@ class Account
   private
 
   def set_exp_date
-    # TODO: Set the exp date 5 yrs from Date.today
-    "10/17"
+    Date.today.next_year(STANDARD_VALIDITY_YRS).strftime("%m/%y")
   end
 
   def generate_pin

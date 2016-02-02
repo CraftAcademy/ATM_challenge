@@ -14,7 +14,8 @@ class Person
     end
 
   def get_cash(amount, account, atm, pin)
-    atm.withdraw(amount, pin, account.exp_date, account)
+    receipt = atm.withdraw(amount, pin, account.exp_date, account)
     @cash += amount
+    receipt
   end
 end
