@@ -19,7 +19,7 @@ Open up `irb` and run the following commands:
 2.2.1 :005 > person = Person.new('Thomas')
  => #<Person:0x007ff4f912ed28 @name="Thomas", @cash=0>
 # Create account
-2.2.1 :006 > account = person.create_account[0]
+2.2.1 :006 > account = person.create_account(Account)
 => #<Account:0x007ff4f8b5e290 @holder=#<Person:0x007ff4f912ed28 @name="Thomas", @cash=0, @accounts=[#<Account:0x007ff4f8b5e290 ...>]>, @balance=0, @exp_date="10/17", @pin=3513>
 # Create an ATM
 2.2.1 :007 > atm = Atm.new
