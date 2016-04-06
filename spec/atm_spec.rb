@@ -19,7 +19,7 @@ describe Atm do
                  message: :success,
                  date: Date.today.strftime('%F'),
                  amount: 5,
-                 bills: 1
+                 bills: [5]
         }
 
       expect(subject.withdraw(5, account.pin, account.exp_date, account)).to eq output
@@ -69,6 +69,17 @@ describe Atm do
         }
       expect(subject.withdraw(105, account.pin, account.exp_date, account)).to eq output
     end
+
+    it 'expect withdraw of 35 to output bills array' do
+      output = { status: true,
+                 message: :success,
+                 date: Date.today.strftime('%F'),
+                 amount: 25,
+                 bills: [20,5]
+      }
+      expect(subject.withdraw(25, account.pin, account.exp_date, account)).to eq output
+    end
+
   end
 
   context 'is out of funds' do

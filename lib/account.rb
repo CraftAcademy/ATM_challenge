@@ -4,14 +4,14 @@ class Account
   def initialize(options={})
     @holder = options[:holder]
     if options[:holder].respond_to?(:accounts)
-      options[:holder].accounts.push self
+       options[:holder].accounts.push self
     end
     @balance = options[:balance] || 0
     @exp_date = set_exp_date
     @pin = generate_pin
   end
 
-  def deposit(amount) #TODO shouldnt include @account ?
+  def deposit(amount) 
     @balance += amount
   end
 
